@@ -1,6 +1,7 @@
 ﻿using AdminPanel.BLL.DTO;
 using AdminPanel.BLL.Interfaces;
 using AdminPanel.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.Controllers
@@ -16,6 +17,7 @@ namespace AdminPanel.Controllers
             _accountService = accountService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
@@ -29,6 +31,7 @@ namespace AdminPanel.Controllers
             return StatusCode(500);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateAccounts([FromBody] params UpdateAccountStatusDTO[] updateAccountStatusDTOs)
         {
@@ -41,6 +44,7 @@ namespace AdminPanel.Controllers
             return StatusCode(500);
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteAccounts([FromBody] params Guid[] deleteIds)
         {
