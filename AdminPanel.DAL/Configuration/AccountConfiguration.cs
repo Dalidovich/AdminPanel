@@ -14,7 +14,7 @@ namespace AdminPanel.DAL.Configuration
             builder.ToTable(Table_name);
 
             builder.HasKey(e => new { e.Id });
-            builder.HasIndex(e => e.Email);
+            builder.HasIndex(e => e.Email).IsUnique();
 
             builder.Property(e => e.Id)
                    .HasColumnType(EntityDataTypes.Guid)
@@ -25,8 +25,8 @@ namespace AdminPanel.DAL.Configuration
                    .HasColumnName("name");
 
             builder.Property(e => e.Email)
-                   .HasColumnType(EntityDataTypes.Character_varying)
-                   .HasColumnName("email");
+                    .HasColumnType(EntityDataTypes.Character_varying)
+                    .HasColumnName("email");
 
             builder.Property(e => e.Password)
                    .HasColumnType(EntityDataTypes.Character_varying)
