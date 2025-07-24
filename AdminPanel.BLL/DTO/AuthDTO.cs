@@ -3,12 +3,12 @@
     public record AuthDTO
     {
         public string JWTToken { get; set; }
-        public Guid ClientId { get; set; }
+        public Guid AccountId { get; set; }
 
-        public AuthDTO(string jWTToken, Guid clientId)
+        public AuthDTO(string jWTToken, Guid accountId)
         {
             JWTToken = jWTToken;
-            ClientId = clientId;
+            AccountId = accountId;
         }
     }
 }

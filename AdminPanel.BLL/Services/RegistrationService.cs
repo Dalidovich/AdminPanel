@@ -46,7 +46,6 @@ namespace AdminPanel.BLL.Services
             _tokenService.CreatePasswordHash(DTO.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             var newAccount = new Account().Create(DTO, Convert.ToBase64String(passwordSalt), Convert.ToBase64String(passwordHash));
-            DTO.Password = Convert.ToBase64String(passwordHash);
             newAccount = (await _accountService.CreateAccountAsync(newAccount)).Data;
 
             return new StandartResponse<AuthDTO>()

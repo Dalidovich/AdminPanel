@@ -18,6 +18,22 @@ namespace AdminPanel.Controllers
         }
 
         [Authorize]
+        [HttpGet("valid/{id}")]
+        public async Task<IActionResult> IsValidAccount(Guid id)
+        {
+            var resourse = await _accountService.GetAccountAsync(x => x.Id == id && x.Status != AccountStatus.Blocked);
+            switch (resourse.InnerStatusCode)
+            {
+                case InnerStatusCode.EntityNotFound:
+                    return NotFound();
+                case InnerStatusCode.AccountRead:
+                    return Ok();
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
@@ -49,7 +65,7 @@ namespace AdminPanel.Controllers
         public async Task<IActionResult> DeleteAccounts([FromBody] params Guid[] deleteIds)
         {
             var resourse = await _accountService.DeleteAccountsAsync(deleteIds);
-            if (resourse.InnerStatusCode == InnerStatusCode.AccountUpdate)
+            if (resourse.InnerStatusCode == InnerStatusCode.AccountDelete)
             {
                 return Ok(resourse.Data);
             }

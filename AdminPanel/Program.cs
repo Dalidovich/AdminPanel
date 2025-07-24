@@ -21,7 +21,20 @@ namespace AdminPanel
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(StandartConst.CorsPolicyName,
+                    CorsBuilder => CorsBuilder
+                        .WithOrigins($"{builder.Configuration.GetSection("CorsSettings:URL").Value}")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        );
+            });
+
             var app = builder.Build();
+
+            app.UseCors(builder.Configuration.GetSection("CorsSettings:CorsPolicyName").Value);
 
             if (app.Environment.IsDevelopment())
             {
