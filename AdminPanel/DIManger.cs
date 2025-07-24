@@ -1,4 +1,4 @@
-﻿using AdminPanel.DAL.Implements;
+﻿using AdminPanel.DAL.Repositories.Implements;
 using AdminPanel.DAL.Repositories.Interfaces;
 using AdminPanel.Domain.Entities;
 

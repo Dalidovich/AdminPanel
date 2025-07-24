@@ -8,6 +8,7 @@ namespace AdminPanel.DAL.Repositories.Interfaces
         public T Update(T entity);
         public Task<bool> DeleteAsync(Guid deleteId);
         public Task<IEnumerable<T>> GetAllWhereAsync(Expression<Func<T, bool>> expression);
+        public Task<IEnumerable<T>> ReadAllWhereAsync(Expression<Func<T, bool>> expression);
         public Task<T?> GetOneWhereAsync(Expression<Func<T, bool>> expression);
         public Task<bool> SaveAsync();
     }

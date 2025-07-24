@@ -3,7 +3,7 @@ using AdminPanel.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace AdminPanel.DAL.Implements
+namespace AdminPanel.DAL.Repositories.Implements
 {
     public class AccountRepository : IRepository<Account>
     {
@@ -36,6 +36,11 @@ namespace AdminPanel.DAL.Implements
         public async Task<Account?> GetOneWhereAsync(Expression<Func<Account, bool>> expression)
         {
             return await _db.Accounts.Where(expression).SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Account>> ReadAllWhereAsync(Expression<Func<Account, bool>> expression)
+        {
+            return await _db.Accounts.AsNoTracking().Where(expression).ToListAsync();
         }
 
         public async Task<bool> SaveAsync()
