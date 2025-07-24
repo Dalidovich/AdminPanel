@@ -1,4 +1,4 @@
-﻿namespace AdminPanel.Domain.DTO
+﻿namespace AdminPanel.BLL.DTO
 {
     public class AccountDTO
     {

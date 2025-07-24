@@ -1,4 +1,4 @@
-﻿using AdminPanel.Domain.DTO;
+﻿using AdminPanel.BLL.DTO;
 using Npgsql;
 using System.Net;
 

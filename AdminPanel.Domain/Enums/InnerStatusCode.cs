@@ -9,6 +9,7 @@
         AccountDelete = 30,
         AccountRead = 40,
         AccountExist = 50,
+        AccountAuthenticate = 60,
 
         OK = 200,
         OKNoContent = 204,

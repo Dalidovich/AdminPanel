@@ -1,6 +1,5 @@
 ﻿using AdminPanel.BLL.Interfaces;
 using AdminPanel.DAL.Repositories.Interfaces;
-using AdminPanel.Domain.DTO;
 using AdminPanel.Domain.Entities;
 using AdminPanel.Domain.Enums;
 using AdminPanel.Domain.InnerResponse;
@@ -17,9 +16,9 @@ namespace AdminPanel.BLL.Services
             _accountRepository = repo;
         }
 
-        public async Task<BaseResponse<Account>> CreateClientAsync(AccountDTO createDTO)
+        public async Task<BaseResponse<Account>> CreateAccountAsync(Account account)
         {
-            var createEntity = await _accountRepository.AddAsync(new(createDTO));
+            var createEntity = await _accountRepository.AddAsync(account);
             await _accountRepository.SaveAsync();
 
             return new StandartResponse<Account>()
@@ -30,7 +29,7 @@ namespace AdminPanel.BLL.Services
             };
         }
 
-        public async Task<BaseResponse<bool>> DeleteClientAsync(Guid deleteId)
+        public async Task<BaseResponse<bool>> DeleteAccountAsync(Guid deleteId)
         {
             var entity = await _accountRepository
                 .GetOneWhereAsync(x => x.Id == deleteId);
@@ -55,7 +54,7 @@ namespace AdminPanel.BLL.Services
             };
         }
 
-        public async Task<BaseResponse<Account>> GetClientAsync(Expression<Func<Account, bool>> expression)
+        public async Task<BaseResponse<Account>> GetAccountAsync(Expression<Func<Account, bool>> expression)
         {
             var entity = await _accountRepository.GetOneWhereAsync(expression);
             if (entity == null)
@@ -75,7 +74,7 @@ namespace AdminPanel.BLL.Services
             };
         }
 
-        public async Task<BaseResponse<IEnumerable<Account>>> GetClientsAsync(Expression<Func<Account, bool>> expression)
+        public async Task<BaseResponse<IEnumerable<Account>>> GetAccountsAsync(Expression<Func<Account, bool>> expression)
         {
             var entities = await _accountRepository.GetAllWhereAsync(expression);
 
@@ -87,7 +86,7 @@ namespace AdminPanel.BLL.Services
             };
         }
 
-        public async Task<BaseResponse<Account>> UpdateClientAsync(Guid id, AccountStatus newStatus)
+        public async Task<BaseResponse<Account>> UpdateAccountAsync(Guid id, AccountStatus newStatus)
         {
             var updateEntity = await _accountRepository.GetOneWhereAsync(x => x.Id == id);
 

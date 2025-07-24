@@ -1,4 +1,3 @@
-
 using AdminPanel.DAL;
 using AdminPanel.Domain.Enums;
 using AdminPanel.Midlaware;
@@ -16,6 +15,7 @@ namespace AdminPanel
             builder.AddRepositores();
             builder.AddServices();
             builder.AddHostedService();
+            builder.AddJWT();
             builder.Services.AddDbContext<AppDBContext>(opt => opt.UseNpgsql(
                 builder.Configuration.GetConnectionString(StandartConst.NameConnection)));
             builder.Services.AddEndpointsApiExplorer();
