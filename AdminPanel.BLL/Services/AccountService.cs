@@ -1,4 +1,5 @@
-﻿using AdminPanel.BLL.Interfaces;
+﻿using AdminPanel.BLL.DTO;
+using AdminPanel.BLL.Interfaces;
 using AdminPanel.DAL.Repositories.Interfaces;
 using AdminPanel.Domain.Entities;
 using AdminPanel.Domain.Enums;
@@ -109,6 +110,40 @@ namespace AdminPanel.BLL.Services
                 Data = updateEntity,
                 InnerStatusCode = InnerStatusCode.AccountUpdate,
                 Message = "account update"
+            };
+        }
+
+        public async Task<BaseResponse<int>> UpdateAccountsAsync(UpdateAccountStatusDTO[] updateAccountStatusDTOs)
+        {
+            var updateCount = 0;
+            for (int i = 0; i < updateAccountStatusDTOs.Length; i++)
+            {
+                var response = await UpdateAccountAsync(updateAccountStatusDTOs[i].Id, updateAccountStatusDTOs[i].NewStatus);
+                updateCount += response.InnerStatusCode == InnerStatusCode.AccountUpdate ? 1 : 0;
+            }
+
+            return new StandartResponse<int>()
+            {
+                Data = updateCount,
+                InnerStatusCode = InnerStatusCode.AccountUpdate,
+                Message = $"{updateCount} updated from {updateAccountStatusDTOs.Length}"
+            };
+        }
+
+        public async Task<BaseResponse<int>> DeleteAccountsAsync(Guid[] deleteIds)
+        {
+            var deleteCount = 0;
+            for (int i = 0; i < deleteIds.Length; i++)
+            {
+                var response = await DeleteAccountAsync(deleteIds[i]);
+                deleteCount += response.InnerStatusCode == InnerStatusCode.AccountDelete ? 1 : 0;
+            }
+
+            return new StandartResponse<int>()
+            {
+                Data = deleteCount,
+                InnerStatusCode = InnerStatusCode.AccountDelete,
+                Message = $"{deleteCount} updated from {deleteIds.Length}"
             };
         }
     }

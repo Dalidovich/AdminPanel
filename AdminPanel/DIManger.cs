@@ -21,6 +21,8 @@ namespace AdminPanel
         public static void AddServices(this WebApplicationBuilder webApplicationBuilder)
         {
             webApplicationBuilder.Services.AddScoped<IAccountService, AccountService>();
+            webApplicationBuilder.Services.AddScoped<ITokenService, TokenService>();
+            webApplicationBuilder.Services.AddScoped<IRegistrationService, RegistrationService>();
         }
 
         public static void AddHostedService(this WebApplicationBuilder webApplicationBuilder)
