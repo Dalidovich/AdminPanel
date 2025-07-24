@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdminPanel.BLL\AdminPanel.BLL.csproj" />
     <ProjectReference Include="..\AdminPanel.DAL\AdminPanel.DAL.csproj" />
     <ProjectReference Include="..\AdminPanel.Domain\AdminPanel.Domain.csproj" />
   </ItemGroup>

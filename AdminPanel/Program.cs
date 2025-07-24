@@ -1,6 +1,7 @@
 
 using AdminPanel.DAL;
 using AdminPanel.Domain.Enums;
+using AdminPanel.Midlaware;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel
@@ -28,9 +29,11 @@ namespace AdminPanel
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
 
             app.Run();

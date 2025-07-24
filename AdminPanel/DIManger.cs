@@ -1,6 +1,9 @@
-﻿using AdminPanel.DAL.Repositories.Implements;
+﻿using AdminPanel.BLL.Interfaces;
+using AdminPanel.BLL.Services;
+using AdminPanel.DAL.Repositories.Implements;
 using AdminPanel.DAL.Repositories.Interfaces;
 using AdminPanel.Domain.Entities;
+using AdminPanel.HostedServices;
 
 namespace AdminPanel
 {
@@ -13,17 +16,12 @@ namespace AdminPanel
 
         public static void AddServices(this WebApplicationBuilder webApplicationBuilder)
         {
-
+            webApplicationBuilder.Services.AddScoped<IAccountService, AccountService>();
         }
 
         public static void AddHostedService(this WebApplicationBuilder webApplicationBuilder)
         {
-
-        }
-
-        public static void AddMiddleware(this WebApplication webApplication)
-        {
-
+            webApplicationBuilder.Services.AddHostedService<CheckDBHostedService>();
         }
     }
 }
