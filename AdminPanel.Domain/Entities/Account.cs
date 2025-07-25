@@ -9,6 +9,7 @@ namespace AdminPanel.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
+        public DateTime LastActivity { get; set; }
         public AccountStatus Status { get; set; }
 
         public Account()

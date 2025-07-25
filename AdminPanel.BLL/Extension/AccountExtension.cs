@@ -12,6 +12,7 @@ namespace AdminPanel.BLL.Extension
             account.Password = hash;
             account.Salt = salt;
             account.Status = 0;
+            account.LastActivity = DateTime.UtcNow;
 
             return account;
         }

@@ -34,11 +34,27 @@ namespace AdminPanel.Controllers
         }
 
         [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> IsValidAccount(Guid id, [FromBody] DateTime lastActivity)
+        {
+            var resourse = await _accountService.UpdateAccountAsync(id, lastActivity);
+            switch (resourse.InnerStatusCode)
+            {
+                case InnerStatusCode.EntityNotFound:
+                    return NotFound();
+                case InnerStatusCode.AccountUpdate:
+                    return Ok();
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
             var resourse = await _accountService.GetAccountsAsync(x => x.Id != null);
-            var orderedResourse = resourse.Data.OrderBy(x => x.Email);
+            var orderedResourse = resourse.Data.OrderBy(x => x.LastActivity);
             if (resourse.InnerStatusCode == InnerStatusCode.AccountRead)
             {
                 return Ok(orderedResourse);

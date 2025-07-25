@@ -146,5 +146,31 @@ namespace AdminPanel.BLL.Services
                 Message = $"{deleteCount} updated from {deleteIds.Length}"
             };
         }
+
+        public async Task<BaseResponse<Account>> UpdateAccountAsync(Guid id, DateTime lastActivity)
+        {
+            var updateEntity = await _accountRepository.GetOneWhereAsync(x => x.Id == id);
+
+            if (updateEntity == null)
+            {
+                return new StandartResponse<Account>()
+                {
+                    Data = updateEntity,
+                    InnerStatusCode = InnerStatusCode.EntityNotFound,
+                    Message = "account not found"
+                };
+            }
+
+            updateEntity.LastActivity = lastActivity;
+            _accountRepository.Update(updateEntity);
+            await _accountRepository.SaveAsync();
+
+            return new StandartResponse<Account>()
+            {
+                Data = updateEntity,
+                InnerStatusCode = InnerStatusCode.AccountUpdate,
+                Message = "account update"
+            };
+        }
     }
 }

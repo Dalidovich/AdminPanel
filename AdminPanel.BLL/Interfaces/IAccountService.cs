@@ -12,6 +12,7 @@ namespace AdminPanel.BLL.Interfaces
         public Task<BaseResponse<IEnumerable<Account>>> GetAccountsAsync(Expression<Func<Account, bool>> expression);
         public Task<BaseResponse<Account>> CreateAccountAsync(Account createDTO);
         public Task<BaseResponse<Account>> UpdateAccountAsync(Guid id, AccountStatus newStatus);
+        public Task<BaseResponse<Account>> UpdateAccountAsync(Guid id, DateTime lastActivity);
         public Task<BaseResponse<int>> UpdateAccountsAsync(UpdateAccountStatusDTO[] updateAccountStatusDTOs);
         public Task<BaseResponse<bool>> DeleteAccountAsync(Guid deleteId);
         public Task<BaseResponse<int>> DeleteAccountsAsync(Guid[] deleteIds);
