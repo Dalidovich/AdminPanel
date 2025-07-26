@@ -47,6 +47,7 @@ namespace AdminPanel
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<ValidatorAccountMiddleware>();
             app.MapControllers();
 
             app.Run();

@@ -2,7 +2,7 @@
 {
     public static class CustomClaimType
     {
-        public const string ClientId = "Id";
-        public const string ClientEmail = "Emaile";
+        public const string AccountId = "Id";
+        public const string AccountEmail = "Email";
     }
 }

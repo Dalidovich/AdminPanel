@@ -18,24 +18,8 @@ namespace AdminPanel.Controllers
         }
 
         [Authorize]
-        [HttpGet("valid/{id}")]
-        public async Task<IActionResult> IsValidAccount(Guid id)
-        {
-            var resourse = await _accountService.GetAccountAsync(x => x.Id == id && x.Status != AccountStatus.Blocked);
-            switch (resourse.InnerStatusCode)
-            {
-                case InnerStatusCode.EntityNotFound:
-                    return NotFound();
-                case InnerStatusCode.AccountRead:
-                    return Ok();
-                default:
-                    return StatusCode(500);
-            }
-        }
-
-        [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> IsValidAccount(Guid id, [FromBody] DateTime lastActivity)
+        public async Task<IActionResult> UpdateAccount(Guid id, [FromBody] DateTime lastActivity)
         {
             var resourse = await _accountService.UpdateAccountAsync(id, lastActivity);
             switch (resourse.InnerStatusCode)

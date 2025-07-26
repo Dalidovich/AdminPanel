@@ -20,12 +20,12 @@ namespace AdminPanel.BLL.Services
             _options = options.Value;
         }
 
-        public string GetToken(Account client)
+        public string GetToken(Account account)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(CustomClaimType.ClientEmail, client.Email),
-                new Claim(CustomClaimType.ClientId, client.Id.ToString())
+                new Claim(CustomClaimType.AccountEmail, account.Email),
+                new Claim(CustomClaimType.AccountId, account.Id.ToString())
             };
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
